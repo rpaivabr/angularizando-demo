@@ -272,11 +272,11 @@ export class LineBreakPipe implements PipeTransform {
 }
 ```
 
-src/assets/avatar-chatbot.png
-[Link da pasta com as imagens](https://github.com/angularizando/2024-04-04-ng-gemini/tree/main/public)
+public/avatar-chatbot.png
+[Link da imagem](https://raw.githubusercontent.com/angularizando/2024-04-04-ng-gemini/refs/heads/main/public/avatar-chatbot.png)
 
-src/assets/avatar-user.png
-[Link da pasta com as imagens](https://github.com/angularizando/2024-04-04-ng-gemini/tree/main/public)
+public/avatar-user06.png
+[Link da imagem](https://raw.githubusercontent.com/angularizando/2024-04-04-ng-gemini/refs/heads/main/public/avatar-user06.png)
 
 src/app/app-config.ts
 ```typescript

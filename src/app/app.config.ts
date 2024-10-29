@@ -12,6 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
-    importProvidersFrom(MarkdownModule.forRoot()),
+    importProvidersFrom(MarkdownModule.forRoot()), provideAnimationsAsync(),
   ]
 };

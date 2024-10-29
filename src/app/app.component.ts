@@ -4,6 +4,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import {MatStepperModule} from '@angular/material/stepper';
+
 
 export interface Post {
   title: string;
@@ -26,31 +28,36 @@ export interface Article extends Post {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatToolbarModule, MarkdownModule],
+  imports: [RouterOutlet, MatToolbarModule, MarkdownModule, MatStepperModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   private http = inject(HttpClient);
-  title = 'demos';
-  selectedStep = signal(2);
-  steps = [
-    { name: 'Before you begin', content: '' },
-    { name: 'Get the code', content: '' },
-    { name: 'Establish a baseline', content: '' },
-  ];
+  title = 'Demo: Workshop Angular com Gemini';
+  selectedStep = signal(1);
+  steps: { name: string; content: string}[] = [];
   article = signal('');
 
   async ngOnInit() {
-    const file = await this.getArticle();
-    console.log(file);
-    this.article.set(file);
+    const content1 = await this.getArticle('/step1.md');
+    const content2 = await this.getArticle('/step2.md');
+    const content3 = await this.getArticle('/step3.md');
+    this.steps = [
+      { name: 'Exemplo 1', content: content1 },
+      { name: 'Exemplo 2', content: content2 },
+      { name: 'Exemplo 3', content: content3 },
+    ]
+    this.article.set(content1);
   }
 
+  selectStep(index: number) {
+    this.article.set(this.steps[index].content);
+  }
 
-  async getArticle(): Promise<string> {
+  private async getArticle(filename: string): Promise<string> {
     const file = await firstValueFrom(
-      this.http.get(`/index.md`, {
+      this.http.get(filename, {
         responseType: 'text',
       })
     );

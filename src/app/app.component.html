@@ -2,15 +2,13 @@
   <span>{{ title }}</span>
 </mat-toolbar>
 
-<div class="container">
-  <div class="steps">
-    @for (step of steps; track $index) {
-      <div class="step">{{ $index + 1 }} - {{ step.name }}</div>
-    }
-  </div>
-
-  <div class="content">
-    <section markdown [data]="article()"></section>
-  </div>
-
-</div>
+<mat-stepper (selectedIndexChange)="selectStep($event)">
+  @for (step of steps; track $index) {
+    <mat-step (click)="selectStep($index)">
+      <ng-template matStepLabel>{{ step.name }}</ng-template>
+      <div class="content">
+        <section markdown [data]="article()"></section>
+      </div>
+    </mat-step>
+  }
+</mat-stepper>
